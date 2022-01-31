@@ -65,6 +65,10 @@ describe Paperclip::HttpUrlProxyAdapter do
       @subject.original_filename = 'image.png'
       assert_equal 'image.png', @subject.original_filename
     end
+
+    it "doesn't emit deprecation warnings" do
+      expect { subject }.to_not(output(/URI\.(un)?escape is obsolete/).to_stderr)
+    end
   end
 
   context "a url with query params" do
